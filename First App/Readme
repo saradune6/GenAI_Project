@@ -17,7 +17,7 @@
 
 ### To run question and answering app:
 
-     streamlit run gemini_app_qa.py
+     streamlit run Gemini_App.py
 
 
 ###  To run language translator app:

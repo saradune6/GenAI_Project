@@ -22,4 +22,4 @@
 
 ###  To run language translator app:
 
-    streamlit run gemini_applanguage_translator.py
+    streamlit run gemini_lang_translator.py
