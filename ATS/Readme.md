@@ -24,8 +24,7 @@ Before running the app, ensure you have the following installed:
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/smart-ats.git
-    cd smart-ats
+    git clone [HTTPS_LINK]
     ```
 
 2. Install the required Python packages:
@@ -69,5 +68,3 @@ You can also go ahead with the published link to test the application.
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes. Ensure that your code adheres to the project's coding standards and includes appropriate tests.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
