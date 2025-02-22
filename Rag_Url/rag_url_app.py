@@ -17,10 +17,18 @@ api_key = os.getenv("GOOGLE_API_KEY")
 if not api_key:
     raise ValueError("GOOGLE_API_KEY is missing. Please set it in your environment variables.")
 
-st.title("RAG Application")
+st.title("🔍 Smart Web Knowledge Assistant")
+
+# Initialize session state for history
+if "history" not in st.session_state:
+    st.session_state.history = []
 
 # List of URLs to process
-urls = ['https://www.victoriaonmove.com.au/local-removalists.html', 'https://victoriaonmove.com.au/index.html', 'https://victoriaonmove.com.au/contact.html']
+urls = [
+    "https://www.victoriaonmove.com.au/local-removalists.html",
+    "https://victoriaonmove.com.au/index.html",
+    "https://victoriaonmove.com.au/contact.html",
+]
 
 # Load documents from URLs
 loader = UnstructuredURLLoader(urls=urls)
@@ -79,9 +87,22 @@ prompt_template = ChatPromptTemplate.from_messages(
 )
 
 # Chat input
-query = st.chat_input("Say something: ") 
+query = st.chat_input("Ask a question: ") 
 if query:
     question_answer_chain = create_stuff_documents_chain(llm, prompt_template)
     rag_chain = create_retrieval_chain(retriever, question_answer_chain)
     response = rag_chain.invoke({"input": query})
-    st.write(response.get("answer", "No response generated."))
+    answer = response.get("answer", "No response generated.")
+
+    # Save query and response to session history
+    st.session_state.history.append({"question": query, "answer": answer})
+
+    # Display response
+    # st.write(f"**Answer:** {answer}")
+
+# Display chat history
+# st.subheader("📜 Chat History")
+for entry in st.session_state.history:
+    st.write(f"**Q:** {entry['question']}")
+    st.write(f"**A:** {entry['answer']}")
+    st.write("---")
